@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #e6dfc7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: url(images/chapter1/key.webp);
+    background-position: center;
+    background-size: cover;
+}
+
+.chapter2scn1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    animation: fadeIn 2s ease-in-out;
+    text-align: center;
+}
+
+.head_text {
+    font-size: 2.5rem;
+    color: #7e5c4e;
+    font-family: 'Great Vibes', cursive;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.key-icon {
+    font-size: 4rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    color: #fff;
+    background: #4e3a2e;
+    border-radius: 50%;
+    padding: 10px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.key-icon:hover {
+    transform: scale(1.1);
+    background: #5a4235;
+}
+
+.container {
+    display: none;
+    flex-direction: row;
+    height: 100%;
+    width: 80%;
+}
+
+.left-part, .right-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background: #f9f1e2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+    position: relative;
+    background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+    background-size: cover;
+    border-radius: 15px;
+    padding: 20px;
+    color: #7e5c4e;
+}
+
+.right-part {
+    padding: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: 'Playfair Display', serif;
+    color: #3e312f;
+}
+
+.photo-frame {
+    width: 80%;
+    height: 80%;
+    border: 5px solid #f4e1c1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    transform: rotate(4deg);
+    transition: transform 0.5s ease;
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg);
+}
+
+.pin {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #7e5c4e;
+    border: 3px solid white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.heart {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    font-size: 3rem;
+    color: #7e5c4e;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+.paper-curl {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: #f1e6d3;
+    transform: rotate(45deg);
+    border-radius: 15%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.quest {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    color: #3e312f;
+    font-family: 'Playfair Display', serif;
+}
+
+.quest-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #7e5c4e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quest-button:hover {
+    background-color: #5a4235;
+}
+.keyyy{
+    position: absolute;
+    top:88%;
+    rotate: 150deg;
+    left: 20%;
+    color: red;
+    opacity: 0;
+
+}

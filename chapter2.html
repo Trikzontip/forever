@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Diary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chapter2.css">
+</head>
+<body>
+    <audio autoplay loop id="backgroundAudio">
+        <source src="images/chapter1/untilifundu.mp3" type="audio/ogg">
+        <source src="images/chapter1/untilifundu.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="chapter2scn1" id="intro-section">
+        <div class="head_text">
+            Can you find the correct key to open the diary
+            <span onclick="startScene()" class="keyyy">🔑</span>
+        </div>
+    </div>
+    <div class="container" id="content-section" style="display: none;">
+        <div class="left-part">
+            <div class="photo-frame" id="image">
+                <div class="pin"></div>
+            </div>
+            <div class="paper-curl"></div>
+            <div class="heart">💖</div>
+        </div>
+        <div class="right-part" id="text-container"></div>
+    </div>
+    <script>
+        const images = [
+            'images/chapter1/3.jpg',
+            'images/chapter1/5.jpg',
+            'images/chapter1/7.jpg',
+            'images/chapter1/12.jpg',
+            'images/chapter1/4.jpg',
+            'images/chapter1/9.jpg'
+        ];
+
+        const textSets = [
+            ["The greatest treasure I ever found is you.", "Every moment together is special."],
+            ["I long to hold your hand in mine,", "To feel its warmth, its gentle sign.","A bond so pure,", "a touch divine, Whispering softly,", "You are mine."],
+            ["From the first moment, you made my heart flutter.", "I love you more each day."],
+            ["Forever and always, you're my love.", "Nothing in the world will change how I feel."],
+            ["Every smile you give lights up my soul.", "Our journey together is my favorite story."],
+            ["You are my heart's melody.", "With you, every day is a dream come true."]
+        ];
+
+        const quests = [
+            { question: "The Song Which i will dedicate for you", answer: "until i found you" },
+            { question: "Prettiest nickname you gave me", answer: "oun" }
+        ];
+
+        let currentIndex = 0;
+        let pageCounter = 0;
+        const imageDiv = document.getElementById('image');
+        const textContainer = document.getElementById('text-container');
+        const introSection = document.getElementById('intro-section');
+        const contentSection = document.getElementById('content-section');
+        let answers = [];
+        function sec() {
+  return new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
+        function updateContent(index) {
+            imageDiv.style.backgroundImage = `url(${images[index]})`;
+            const texts = textSets[index];
+            textContainer.innerHTML = '';
+
+            let i = 0;
+            function appendText() {
+                console.log(currentIndex);
+                if(currentIndex>=6){
+                    window.location.href = "chapter3.html";
+                }
+                if (i < texts.length) {
+                    const p = document.createElement('p');
+                    p.textContent = texts[i];
+                    p.style.opacity = 0;
+                    textContainer.appendChild(p);
+                    p.animate(
+                        [{ opacity: 0 }, { opacity: 1 }],
+                        { duration: 1500, easing: 'ease-in-out', fill: 'forwards' }
+                    );
+                    i++;
+                    setTimeout(appendText, 2000);
+                } else {
+                    pageCounter++;
+                    if (pageCounter % 2 === 0 && Math.floor(pageCounter / 2) - 1 < quests.length) {
+                        sec();
+
+                        displayQuest(quests[Math.floor(pageCounter / 2) - 1]);
+                        p.animate(
+                        [{ opacity: 0 }, { opacity: 1 }],
+                        { duration: 1500, easing: 'ease-in-out', fill: 'forwards' }
+                    );
+                    } else {
+                        currentIndex = (currentIndex + 1);
+                        setTimeout(() => updateContent(currentIndex), 3000);
+                    }
+                }
+            }
+            appendText();
+        }
+
+        function displayQuest(questObj) {
+            textContainer.innerHTML = '';
+            const questContainer = document.createElement('div');
+            questContainer.style.margin = '20px';
+            questContainer.style.padding = '15px';
+            questContainer.style.border = '2px dashed #7e5c4e';
+            questContainer.style.backgroundColor = '#f9f1e2';
+            questContainer.style.borderRadius = '12px';
+            questContainer.style.textAlign = 'center';
+
+            const questText = document.createElement('p');
+            questText.textContent = questObj.question;
+            questText.style.fontSize = '1.5rem';
+            questText.style.color = '#3e312f';
+            questText.style.marginBottom = '10px';
+
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.placeholder = 'Your answer here';
+            inputField.style.margin = '10px 0';
+            inputField.style.padding = '10px';
+            inputField.style.width = '80%';
+            inputField.style.border = '1px solid #ccc';
+            inputField.style.borderRadius = '8px';
+            inputField.style.fontSize = '1rem';
+
+            const continueButton = document.createElement('button');
+            continueButton.textContent = 'Continue';
+            continueButton.style.padding = '10px 20px';
+            continueButton.style.backgroundColor = '#7e5c4e';
+            continueButton.style.color = '#fff';
+            continueButton.style.border = 'none';
+            continueButton.style.borderRadius = '8px';
+            continueButton.style.cursor = 'pointer';
+            continueButton.style.fontSize = '1rem';
+            continueButton.style.marginTop = '10px';
+            continueButton.addEventListener('click', () => {
+                const userAnswer = inputField.value.trim();
+                if (userAnswer.toLowerCase() === questObj.answer.toLowerCase()) {
+                    answers.push(userAnswer);
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateContent(currentIndex);
+                } else {
+                    alert('Incorrect answer. Please try again.');
+                }
+            });
+
+            questContainer.appendChild(questText);
+            questContainer.appendChild(inputField);
+            questContainer.appendChild(continueButton);
+            textContainer.appendChild(questContainer);
+        }
+
+        function startScene() {
+            introSection.style.opacity = '0';
+            introSection.style.transition = 'opacity 1s ease';
+            introSection.addEventListener('transitionend', () => {
+                introSection.style.display = 'none';
+                contentSection.style.display = 'flex';
+                contentSection.classList.add('fade-in-section');
+                updateContent(currentIndex);
+            });
+        }
+    </script>
+</body>
+</html>

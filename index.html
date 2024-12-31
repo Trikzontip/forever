@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A journey of adventure</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chapter1.css">
+</head>
+<body>
+    <audio autoplay loop id="backgroundAudio">
+        <source src="images/chapter1/one.mp3" type="audio/ogg">
+        <source src="images/chapter1/one.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="Chapter1">
+        <div class="c1scene1" id="c1sc1">
+            <div class="c1scene1-content">
+                <div class="c1sec1">It's Dark here Do u like to call me by name</div>
+                <div class="input">
+                    <input type="text" id="myname">
+                </div>
+                <div class="c1sec1-button">
+                    <button id="callButton" onclick="chap1scene1chng()">Call</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="c1scene2" id="c1sc2">
+            <div class="c1scene1-content">
+                <div class="c1sec1">Chapter 1</div>
+                <div class="c1sec2img">
+                    <img src="images/chapter1/chap1scene2.webp" alt="">
+                </div>
+                <div class="c1para">
+                    I strive to bring light into your life, to chase away the shadows that weigh you down. Your smile is a beacon, a reflection of hope and joy, and every effort I make is to see it shine brighter. In your happiness, I find my purpose, and in your laughter, my heart finds its peace.
+                </div>
+                <div class="c1sec1-button">
+                    <button id="callButton" onclick="chap1scene2chng()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="c1scene3" id="c1sc3">
+            <div class="c1scene1-content">
+                <div class="c1sec1">Chapter 1</div>
+                <div class="c1sec1">Complete the quest to get the Surprise</div>
+                <div class="c1para">
+                    What is the name i used to call you
+                </div>
+                <div class="input">
+                    <input type="text" id="nick">
+                </div>
+                <div class="c1para">
+                    Date we first meet
+                </div>
+                <div class="input">
+                    <input type="text" id="datee">
+                </div>
+                <div class="c1sec1-button">
+                    <button id="callButton" onclick="redirectToPage('one.html')">Next</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="chapter1.js"></script>
+    
+</body>
+</html>

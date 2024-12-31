@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naughty Couple Game</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url(images/chapter1/cardgame.webp); /* Romantic gradient */
+      color: #fff;
+      background-position: center;
+      background-size: cover;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .game-title {
+      font-size: 3rem;
+      color: #ffebc9;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #ff306e;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 35px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card {
+      width: 120px;
+      height: 160px;
+      perspective: 1000px;
+      border-radius: 10px;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      border-radius: 10px;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-front {
+      background: linear-gradient(145deg, #ff1493, #ff69b4); /* Pink gradient */
+      color: #fff;
+      font-size: 2rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .card-back {
+      background: linear-gradient(145deg, #ffe4e1, #ffb6c1); /* Light romantic gradient */
+      color: #333;
+      font-size: 1rem;
+      padding: 10px;
+      text-align: center;
+      transform: rotateY(180deg);
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      background: #ffe4e1;
+      color: #333;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #ff306e;
+    }
+
+    .popup .popup-card {
+      width: 120px;
+      height: 160px;
+      margin: auto;
+      margin-bottom: 20px;
+      perspective: 1000px;
+    }
+
+    .popup .popup-card .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .popup .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .popup input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .popup button {
+      padding: 10px 20px;
+      background: #ff1493;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .popup button:hover {
+      background: #ff306e;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .popup_left{
+        width: 66%;
+
+    }
+    .popup_right{
+        width: 34%;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+    .popup_text{
+        border: 2px solid #ff1493;
+        height: 100%;
+        width: auto;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .show {
+      display: flex;
+    }
+    .complete-dares-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#complete-dares-text {
+  font-size: 1.5rem;
+  color: #ffebc9;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 3px #ff306e;
+  width: 200px;
+  display: inline-block;
+}
+
+  </style>
+</head>
+<body>
+  <audio autoplay loop id="backgroundAudio">
+    <source src="images/chapter1/ipromiseu.mp3" type="audio/ogg">
+    <source src="images/chapter1/ipromiseu.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+  <h1 class="game-title">Let's Bring Some Spices</h1>
+  <div class="complete-dares-container">
+    <div id="complete-dares-text">Complete 5 Dares</div>
+  </div>
+  
+  <div class="card-grid">
+    <!-- Cards will be generated dynamically -->
+    <div class="card" data-dare="">
+      <div class="card-inner">
+        <div class="card-front">💖</div>
+        <div class="card-back"></div>
+      </div>
+    </div>
+    <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card" data-dare="">
+        <div class="card-inner">
+          <div class="card-front">💖</div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="popup-overlay"></div>
+  <div class="popup">
+    <div class="popup_left">
+        <h2>Your Dare</h2>
+        <div class="popup-card">
+            
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">💖</div>
+                <div class="card-back"></div>
+              </div>
+            </div>
+          </div>
+          <div class="input-container">
+            <label for="dare-code">Enter Completion Code:</label>
+            <input type="text" id="dare-code" placeholder="Enter your code">
+            <button id="complete-dare">Complete Dare</button>
+          </div>
+    </div>
+    <div class="popup_right" >
+        <div class="popup_text" id="popupright"></div>
+    </div>
+    
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dares = [
+        "Share a selfie by making this 😜 emoji face",
+        "Record yourself singing a romantic song and send it.",
+        "Record and send a voice note confessing your love in the cheesiest way possible.",
+        "Imitate your partner’s voice and say something cute.",
+        "Send a picture of you blowing a kiss to the camera.",
+        "Recreate a cute childhood photo and share it.",
+        "Put on your fanciest outfit and act as if you’re on a virtual dinner date.",
+        "Change your about with a secret message only your partner will understand.",
+        "Sketch a quick drawing that reminds you of them and send a photo.",
+        "Record yourself saying “I love you” in three different languages.",
+        "Reveal a romantic thought about them you’ve never shared before.",
+        "Blow kisses to the camera every time you say a certain word during the call.",
+        "Imitate everything your partner does on a video call, from their expressions to their gestures—no exceptions!",
+        "Share the most spicest photo of yourself from your phone to spice things up.",
+        "Tell your partner what your favorite body part of theirs is, and then send a picture of the same area of yours."
+      ];
+      const message = [
+        "Every moment with you feels like a dream come true. I'm so grateful to have you in my life, and I promise to cherish you forever.",
+        "You make my world brighter just by being in it. Your smile, your laugh, everything about you fills me with so much happiness.",
+        "No matter what life throws at us, I'll always be here to hold your hand and walk beside you. You're my everything.",
+        "In your eyes, I find the peace and warmth that I've been searching for my whole life. You're my home.",
+        "Every time I think about you, my heart skips a beat. I never knew love could be so pure, so deep, and so beautiful.",
+        "You make my world a thousand times more beautiful, just by being you. I love everything about you.",
+        "I never knew what true happiness was until I met you. You're the love of my life, and I feel so lucky to be with you.",
+        "You have a heart of gold, and it's my privilege to love and care for you. You’re everything I ever wanted and more.",
+        "With you, every day feels like an adventure. I can't wait to see where life takes us together.",
+        "You're not just my girlfriend; you're my best friend, my confidant, and my greatest support. I love you endlessly.",
+        "In your arms, I've found my safe place. I'll always be here for you, just like you've always been for me.",
+        "The way you love me is something I could never have dreamed of. I will spend my life making sure you know how much you mean to me.",
+        "There’s no one in this world who makes me feel the way you do. You’re my heart, my soul, and my everything.",
+        "Every day spent with you is a gift, and I thank the universe for bringing you into my life. You're my forever.",
+        "When I look at you, I see my future, my dreams, and my happiness. I love you more than words can say"
+      ]
+
+      // Shuffle the dares
+      const shuffledDares = dares.sort(() => Math.random() - 0.5);
+
+      const cards = document.querySelectorAll(".card");
+      const popup = document.querySelector(".popup");
+      const popupOverlay = document.querySelector(".popup-overlay");
+      const popupCard = popup.querySelector(".popup-card .card-back");
+      const dareCodeInput = document.getElementById("dare-code");
+      const completeDareButton = document.getElementById("complete-dare");
+      const completeDaresText = document.getElementById("complete-dares-text");
+      let flippedCard = null;
+      let completedDares = 0;
+
+      cards.forEach((card, index) => {
+        if (index < shuffledDares.length) {
+          const dare = shuffledDares[index];
+          const msg = message[index]
+          card.dataset.dare = dare;
+          card.querySelector(".card-back").textContent = dare;
+          document.getElementById("popupright").innerText=msg;
+        }
+
+        card.addEventListener("click", () => {
+          if (flippedCard && flippedCard !== card) {
+            flippedCard.classList.add("flipped");
+          }
+          let randomNumber = Math.floor(Math.random() * 14) + 1;
+          document.getElementById("popupright").innerText=message[randomNumber];
+          card.classList.add("flipped");
+          flippedCard = card;
+          
+          popupCard.textContent = card.dataset.dare;
+          popup.classList.add("show");
+          popupOverlay.classList.add("show");
+        });
+      });
+
+      completeDareButton.addEventListener("click", () => {
+        const code = dareCodeInput.value.trim();
+
+        if (code === "love123") { // Example success code
+          alert("Dare completed!");
+          completedDares++;
+          completeDaresText.textContent = `Complete ${5 - completedDares} Dares`;
+
+          if (completedDares === 5) {
+            window.location.href = "Chapter4.html"; // Redirect to a new page
+          }
+
+          popup.classList.remove("show");
+          popupOverlay.classList.remove("show");
+          dareCodeInput.value = "";
+        } else {
+          alert("Incorrect code. Try again!");
+        }
+      });
+
+      popupOverlay.addEventListener("click", () => {
+        popup.classList.remove("show");
+        popupOverlay.classList.remove("show");
+      });
+    });
+  </script>
+</body>
+</html>

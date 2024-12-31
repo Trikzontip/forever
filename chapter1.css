@@ -1,0 +1,206 @@
+.Chapter1{
+    width: 100%;
+    background: #181717;
+    font-family: 'harry';
+    font-size: 40px;
+    color: #ff0000;
+    overflow: hidden;
+    text-align: center;
+}
+.c1scene1{
+    width: 100%;
+    height: 100vh;
+    background: #181717;
+    font-family: 'harry';
+    font-size: 40px;
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the input tag */
+input#myname {
+    background-color: #1a1a1a; /* Dark background for the input box */
+    color: #ff0000; /* Blood-red text color */
+    border: 2px solid #ff0000; /* Red border for a striking appearance */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px; /* Adding padding for comfortable typing */
+    font-family: 'Creepster', cursive; /* Optional: A spooky font (import from Google Fonts) */
+    font-size: 18px; /* Comfortable font size */
+    outline: none; /* Removes default focus outline */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Add focus effect for the input tag */
+input#myname:focus {
+    box-shadow: 0 0 10px 3px #ff0000; /* Glowing red shadow on focus */
+    background-color: #2a2a2a; /* Slightly lighter dark background */
+}
+
+/* Placeholder text styling (optional) */
+input#myname::placeholder {
+    color: #555555; /* Dim gray for placeholder text */
+    font-style: italic; /* Adds an eerie feel */
+}
+
+input#nick {
+    background-color: #1a1a1a; /* Dark background for the input box */
+    color: #ff0000; /* Blood-red text color */
+    border: 2px solid #ff0000; /* Red border for a striking appearance */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px; /* Adding padding for comfortable typing */
+    font-family: 'Creepster', cursive; /* Optional: A spooky font (import from Google Fonts) */
+    font-size: 18px; /* Comfortable font size */
+    outline: none; /* Removes default focus outline */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Add focus effect for the input tag */
+input#nick:focus {
+    box-shadow: 0 0 10px 3px #ff0000; /* Glowing red shadow on focus */
+    background-color: #2a2a2a; /* Slightly lighter dark background */
+}
+
+/* Placeholder text styling (optional) */
+input#nick::placeholder {
+    color: #555555; /* Dim gray for placeholder text */
+    font-style: italic; /* Adds an eerie feel */
+}
+input#datee {
+    background-color: #1a1a1a; /* Dark background for the input box */
+    color: #ff0000; /* Blood-red text color */
+    border: 2px solid #ff0000; /* Red border for a striking appearance */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px; /* Adding padding for comfortable typing */
+    font-family: 'Creepster', cursive; /* Optional: A spooky font (import from Google Fonts) */
+    font-size: 18px; /* Comfortable font size */
+    outline: none; /* Removes default focus outline */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Add focus effect for the input tag */
+input#datee:focus {
+    box-shadow: 0 0 10px 3px #ff0000; /* Glowing red shadow on focus */
+    background-color: #2a2a2a; /* Slightly lighter dark background */
+}
+
+/* Placeholder text styling (optional) */
+input#datee::placeholder {
+    color: #555555; /* Dim gray for placeholder text */
+    font-style: italic; /* Adds an eerie feel */
+}
+
+.input{
+    height: 100px;
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.c1sec1-button{
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button#callButton {
+    background-color: #1a1a1a; /* Dark button background */
+    color: #ff0000; /* Blood-red text color */
+    border: 2px solid #ff0000; /* Red border for a horror vibe */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px 20px; /* Comfortable padding */
+    font-family: 'Creepster', cursive; /* Spooky font */
+    font-size: 18px; /* Matching input font size */
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Hover effect for the button */
+button#callButton:hover {
+    box-shadow: 0 0 15px 5px #ff0000; /* Glowing red shadow on hover */
+    background-color: #2a2a2a; /* Slightly lighter dark background */
+}
+
+/* Active effect for the button */
+button#callButton:active {
+    background-color: #000000; /* Pure black for pressed effect */
+    color: #ffffff; /* White text when active */
+}
+
+.c1sec2img img{
+    max-width: 872px;
+}
+
+.c1scene2{
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background: #181717;
+    font-family: 'harry';
+    font-size: 40px;
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.c1scene3{
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background: #181717;
+    font-family: 'harry';
+    font-size: 40px;
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.c1para{
+    font-family: 'Creepster', cursive;
+    font-size: 16px;
+    max-width: 872px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+@font-face {
+    font-family: 'harry';
+    src: url('fonts/harry.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Fade-out effect */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Fade-in effect */
+.fade-in {
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
