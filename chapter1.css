@@ -142,7 +142,7 @@ button#callButton:active {
 .c1scene2{
     overflow: hidden;
     width: 100%;
-    height: 100vh;
+    height: auto;
     background: #181717;
     font-family: 'harry';
     font-size: 40px;
